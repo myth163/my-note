@@ -1,0 +1,70 @@
+# my systemd learning note
+
+/lib/systemd/system：系统默认的单元文件
+/etc/systemd/system：用户安装的软件的单元文件
+/usr/lib/systemd/system：用户自己定义的单元文件
+
+启用定时器:
+sudo systemctl daemon-reload
+sudo systemctl enable name.timer
+sudo systemctl start name.timer
+
+查看日志:
+sudo journalctl -u name.service
+journalctl --disk-usage 查看journal的当前磁盘使用量
+sudo journalctl --vacuum-size=1G 硬性指定日志的总体体积，意味着其会不断删除旧有记录直到所占容量符合要求
+sudo journalctl --vacuum-time=1years 任何早于这一时间点的条目都将被删除
+
+#################################################################################
+
+常用命令：
+
+Systemd 单元：
+# 查看所有单元
+systemctl list-unit-files
+# 查看所有 Service 单元
+systemctl list-unit-files --type service
+# 查看所有 Timer 单元
+systemctl list-unit-files --type timer
+# 启动单元
+systemctl start [UnitName]
+# 关闭单元
+systemctl stop [UnitName]
+# 重启单元
+systemctl restart [UnitName]
+# 杀死单元进程
+systemctl kill [UnitName]
+# 查看单元状态
+systemctl status [UnitName]
+# 开机自动执行该单元
+systemctl enable [UnitName]
+# 关闭开机自动执行
+systemctl disable [UnitName]
+
+/lib/systemd/system：系统默认的单元文件
+/etc/systemd/system：用户安装的软件的单元文件
+/usr/lib/systemd/system：用户自己定义的单元文件
+
+Service 单元：
+ExecStart： systemctl start 所要执行的命令
+ExecStop： systemctl stop 所要执行的命令
+ExecReload： systemctl reload所要执行的命令
+ExecStartPre： ExecStart 之前自动执行的命令
+ExecStartPost： ExecStart 之后自动执行的命令
+ExecStopPost： ExecStop 之后自动执行的命令
+
+
+
+Timer 单元:	
+OnActiveSec：定时器生效后，多少时间开始执行任务
+OnBootSec：系统启动后，多少时间开始执行任务
+OnStartupSec：Systemd 进程启动后，多少时间开始执行任务
+OnUnitActiveSec：该单元上次执行后，等多少时间再次执行
+OnUnitInactiveSec： 定时器上次关闭后多少时间，再次执行
+OnCalendar：基于绝对时间，而不是相对时间执行
+AccuracySec：如果因为各种原因，任务必须推迟执行，推迟的最大秒数，默认是60秒
+Unit：真正要执行的任务，默认是同名的带有.service后缀的单元
+Persistent：如果设置了该字段，即使定时器到时没有启动，也会自动执行相应的单元
+WakeSystem：如果系统休眠，是否自动唤醒系统
+
+# end

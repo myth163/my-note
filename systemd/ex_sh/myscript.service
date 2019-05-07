@@ -1,0 +1,12 @@
+[Unit]
+Description=Myscript auto clear log.out
+
+[Service]
+Type=simple
+ExecStart=/bin/bash   /home/myth/autoclc.sh
+Restart=on-failure
+RestartSec=42s
+
+[Install]
+WantedBy=myscript.target
+

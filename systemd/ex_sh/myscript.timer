@@ -1,0 +1,13 @@
+[Unit]
+Description=Runs myscript every day
+
+[Timer]
+OnBootSec=1min
+OnUnitActiveSec=5min
+#OnCalendar=*-*-* 11:30:00
+Persistent=true
+Unit=myscript.service
+
+
+[Install]
+WantedBy=multi-user.target

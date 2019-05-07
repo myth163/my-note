@@ -1,0 +1,14 @@
+[Unit]
+Description=run nohup java
+ 
+[Service]
+Type=forking
+#Type=simple
+ExecStart=/usr/bin/bash  /home/myth/start-nohup.sh
+ExecReload=/usr/bin/bash /home/myth/restart-nohup.sh
+ExecStop=/usr/bin/bash   /home/myth/stop-nohup.sh
+Restart=on-failure
+RestartSec=10min
+ 
+[Install]
+WantedBy=multi-user.target

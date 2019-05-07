@@ -1,0 +1,4 @@
+[Unit]
+Description=Myscript
+# Lots more stuff could go here, but it's situational.
+# Look at systemd.unit man page.
