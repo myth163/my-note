@@ -1,2 +1,2 @@
-# my-note
+# myth-note
 my note
